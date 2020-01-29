@@ -6,8 +6,16 @@
 ### Example usage
 
 ```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	gom3uparser "github.com/zikwall/gom3u-content-parser"
+)
+
 func main() {
-	parser := p.NewM3UContentParser().
+	parser := gom3uparser.NewM3UContentParser().
 		LoadSource("https://iptv-org.github.io/iptv/countries/ru.m3u", false).
 		Parse()
 
