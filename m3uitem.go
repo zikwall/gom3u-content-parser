@@ -9,20 +9,20 @@ var availableAttributes = []string{
 }
 
 type M3UItem struct {
-	Id              string `json:"id"`
-	TvgId           string
-	TvgName         string
-	TvgUrl          string `json:"tvg_url"`
-	TvgLogo         string
-	TvgCountry      string
-	TvgLanguage     string
-	AudioTrack      string
-	AudioTrackNum   int
-	TvgShift        int
-	Censored        int
-	GroupId         int
-	GroupTitle      string
-	ExtGrp          string
+	Id              string            `json:"id"`
+	TvgId           string            `json:"tvg_id"`
+	TvgName         string            `json:"tvg_name"`
+	TvgUrl          string            `json:"tvg_url"`
+	TvgLogo         string            `json:"tvg_logo"`
+	TvgCountry      string            `json:"tvg_country"`
+	TvgLanguage     string            `json:"tvg_language"`
+	AudioTrack      string            `json:"audio_track"`
+	AudioTrackNum   int               `json:"audio_track_num"`
+	TvgShift        int               `json:"tvg_shift"`
+	Censored        int               `json:"censored"`
+	GroupId         int               `json:"group_id"`
+	GroupTitle      string            `json:"group_title"`
+	ExtGrp          string            `json:"ext_grp"`
 	ExtraAttributes map[string]string `json:"extra_attributes"`
 }
 
