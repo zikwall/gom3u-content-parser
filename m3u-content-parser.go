@@ -8,11 +8,11 @@ type M3UContentParser struct {
 	m3uFileContent string
 	dirtyItems     []string
 	items          []M3UItem
-	countItems     int
+	CountItems     int
 
 	TvgUrl  string
-	cache   int
-	refresh int
+	Cache   int
+	Refresh int
 
 	offsets int
 	limits  int
