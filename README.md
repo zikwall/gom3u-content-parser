@@ -34,3 +34,7 @@ go get github.com/zikwall/gom3u-content-parser
 ### API (todo)
 
 Get attributes
+
+##### Questions?
+
+For all questions and suggestions - welcome to Issues
