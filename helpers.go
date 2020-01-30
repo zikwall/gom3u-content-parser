@@ -7,6 +7,29 @@ import (
 	"unicode"
 )
 
+func Camelize(s string) string {
+	words := strings.Split(strings.Replace(s, "-", "_", -1), "_")
+	for i, word := range words {
+		words[i] = ucFirst(strings.ToLower(word))
+	}
+
+	return lcFirst(strings.Join(words, ""))
+}
+
+func lcFirst(s string) string {
+	if len(s) <= 1 {
+		return strings.ToLower(s)
+	}
+	return strings.ToLower(s[:1]) + s[1:]
+}
+
+func ucFirst(s string) string {
+	if len(s) <= 1 {
+		return strings.ToUpper(s)
+	}
+	return strings.ToUpper(s[:1]) + s[1:]
+}
+
 func ReadStringContentFromFile(source string) string {
 	b, err := ioutil.ReadFile(source)
 	if err != nil {

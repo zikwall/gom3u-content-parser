@@ -1,6 +1,9 @@
 package gom3u_content_parser
 
-import "strings"
+import (
+	"reflect"
+	"strings"
+)
 
 var availableAttributes = []string{
 	"id", "tvg-id", "group_id", "group-title", "tvg-shift",
@@ -17,13 +20,20 @@ type M3UItem struct {
 	TvgCountry      string            `json:"tvg_country"`
 	TvgLanguage     string            `json:"tvg_language"`
 	AudioTrack      string            `json:"audio_track"`
-	AudioTrackNum   int               `json:"audio_track_num"`
-	TvgShift        int               `json:"tvg_shift"`
-	Censored        int               `json:"censored"`
-	GroupId         int               `json:"group_id"`
+	AudioTrackNum   string            `json:"audio_track_num"`
+	TvgShift        string            `json:"tvg_shift"`
+	Censored        string            `json:"censored"`
+	GroupId         string            `json:"group_id"`
 	GroupTitle      string            `json:"group_title"`
 	ExtGrp          string            `json:"ext_grp"`
 	ExtraAttributes map[string]string `json:"extra_attributes"`
+}
+
+func setM3UItemField(m3uitem *M3UItem, field string, value string) {
+	v := reflect.ValueOf(m3uitem).Elem().FieldByName(field)
+	if v.IsValid() {
+		v.SetString(value)
+	}
 }
 
 func NewM3UItem(item string) *M3UItem {
@@ -38,6 +48,13 @@ func NewM3UItem(item string) *M3UItem {
 		m3uitem.TvgName = ex[1]
 
 		m3uitem.ExtraAttributes = ParseAttributes(ex[0])
+
+		for _, attr := range availableAttributes {
+			if _, ok := m3uitem.ExtraAttributes[attr]; ok {
+				structFiledName := ucFirst(Camelize(attr))
+				setM3UItemField(m3uitem, structFiledName, m3uitem.ExtraAttributes[attr])
+			}
+		}
 	}
 
 	if len(result) > 2 && result[2] != "" {
